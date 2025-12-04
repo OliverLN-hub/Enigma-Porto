@@ -1,8 +1,9 @@
 # File: EnigmaModel.py
 
 """ This is the starter file for the Enigma project. """
-
 from EnigmaView import EnigmaView
+from EnigmaRotor import EnigmaRotor
+from EnigmaConstants import ROTOR_PERMUTATIONS
 
 class EnigmaModel:
 
@@ -11,6 +12,10 @@ class EnigmaModel:
         self._views = [ ]
 
         self._key_states = {chr(i): False for i in range(ord('A'), ord('Z') + 1)}
+        self._lamp_states = {chr(i): False for i in range(ord('A'), ord('Z') + 1)}
+
+        # Create three rotors using the permutations defined in EnigmaConstants
+        self._rotors = [EnigmaRotor(p) for p in ROTOR_PERMUTATIONS]
 
     def add_view(self, view):
         """Adds a view to this model."""
@@ -25,21 +30,25 @@ class EnigmaModel:
         return self._key_states.get(letter, False)
 
     def is_lamp_on(self, letter):
-        return False        # In the stub version, lamps are always off
+        return self._lamp_states.get(letter, False)
 
     def key_pressed(self, letter):
         self._key_states[letter] = True
+        self._lamp_states[letter] = True  #light up the same lettter for which key has been decided to press
         self.update()
 
     def key_released(self, letter):
         self._key_states[letter] = False
+        self._lamp_states[letter] = False  #turn off the lamp when key is released
         self.update()
 
     def get_rotor_letter(self, index):
-        return "A"          # In the stub version, all rotors are set to "A"
+        rotor = self._rotors[index]
+        offset = rotor.get_offset()
+        return chr(ord('A') + offset)
 
     def rotor_clicked(self, index):
-        # You need to fill in this code
+        self._rotors[index].advance()
         self.update()
 
 def enigma():
