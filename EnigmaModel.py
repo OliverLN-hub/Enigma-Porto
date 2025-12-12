@@ -108,15 +108,48 @@ class EnigmaModel:
 ############### Projekt DEL 2 ####################
     def encrypt(self, rotors: str, message: str) -> str:
 
-        for rotor, ch, in zip(self,_rotors, rotors):
+        for rotor, ch, in zip(self._rotors, rotors):
             rotor.set_offset(ord(ch) - ord('A'))
 
         encryption_result = []
 
-        #for letter in message:
-        #    fast = self._rotors[2]
-        #    medium = self._rotors[1]
-        #    slow = self._rotors[0]
+        for letter in message:
+            fast = self._rotors[2]
+            medium = self._rotors[1]
+            slow = self._rotors[0]
+
+            # Advance rotors
+            carry = fast.advance()
+            if carry:
+                carry2 = medium.advance()
+                if carry2:
+                    slow.advance()
+
+            index = letter_to_index(letter)
+
+            # Forward pass via rotors
+            for rotor in reversed(self._rotors):
+                index = apply_permutation_forward(
+                    index,
+                    rotor.get_forward_permutation(),
+                    rotor.get_offset()
+                )
+
+            # Reflector
+            index = ord(REFLECTOR_PERMUTATION[index]) - ord('A')
+
+
+            # Backward pass via rotors like the one above
+            for rotor in self._rotors:
+                index = apply_permutation_backward(
+                    index,
+                    rotor.get_backward_permutation(),
+                    rotor.get_offset()
+                )
+
+            encryption_result.append(index_to_letter(index))
+
+        return ''.join(encryption_result)
 
 def enigma():
     model = EnigmaModel()
@@ -127,3 +160,21 @@ def enigma():
 # Startup code
 if __name__ == "__main__":
     enigma()
+
+if __name__ == "__main__":
+    # Create an Enigma model
+    model = EnigmaModel()
+
+    # Test your encrypt function
+    rotors = "AAA"        # Initial rotor settings
+    message = "HELLO"     # Message to encrypt
+
+    cipher = model.encrypt(rotors, message)
+    print("Original message:", message)
+    print("Rotor settings:   ", rotors)
+    print("Encrypted text:   ", cipher)
+
+    # Optional: print final rotor offsets to see stepping
+    print("Final rotor offsets:")
+    for i, rotor in enumerate(model._rotors):
+        print(f"Rotor {i}: {rotor.get_offset()}")

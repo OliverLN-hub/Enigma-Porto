@@ -25,11 +25,14 @@ class EnigmaRotor:
     def get_backward_permutation(self):
         return self._backward_permutation
 
-
+    # Return True if wrapped around from Z then back to A, rerutns a boolean TRUE if thats the case
     def advance(self):
         self._offset = (self._offset + 1) % 26
         return self._offset == 0  
-    # Return True if wrapped around from Z then back to A, rerutns a boolean TRUE if thats the case
+    
+    def set_offset(self, offset: int):
+        self._offset = offset % 26
+
 
 
 
