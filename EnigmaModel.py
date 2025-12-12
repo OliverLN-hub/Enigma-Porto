@@ -105,6 +105,18 @@ class EnigmaModel:
         self._rotors[index].advance()
         self.update()
 
+############### Projekt DEL 2 ####################
+    def encrypt(self, rotors: str, message: str) -> str:
+
+        for rotor, ch, in zip(self,_rotors, rotors):
+            rotor.set_offset(ord(ch) - ord('A'))
+
+        encryption_result = []
+
+        #for letter in message:
+        #    fast = self._rotors[2]
+        #    medium = self._rotors[1]
+        #    slow = self._rotors[0]
 
 def enigma():
     model = EnigmaModel()
