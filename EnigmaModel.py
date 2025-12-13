@@ -49,7 +49,7 @@ class EnigmaModel:
         medium = self._rotors[1]  # middle rotor
         slow = self._rotors[0]   # left rotor
 
-        # Advances the fast/right rotor. If it wraps around, advance the medium rotor, if that also the continue to slow rotor
+        # Advances the fast/right rotor. If it wraps around, advance the medium rotor, and the same goes for the slow rotor.
         carry = fast.advance()
         if carry:
             carry2 = medium.advance()
@@ -107,7 +107,7 @@ class EnigmaModel:
 
 ############### Enkryption af DEL 2 ####################
     def encrypt(self, rotors: str, message: str) -> str:
-
+        message = message.upper()
         for rotor, ch, in zip(self._rotors, rotors):
             rotor.set_offset(ord(ch) - ord('A'))
 
@@ -155,7 +155,7 @@ class EnigmaModel:
 
         ##################### Find Rotor af del 2 #########################
 
-def find_rotor(message: str, cipher: str) -> str:
+def find_rotors(message: str, cipher: str) -> str:
     for a in range(26):
         for b in range(26):
             for c in range(26):
@@ -171,6 +171,7 @@ def find_rotor(message: str, cipher: str) -> str:
                     return rotors
     return "Not found" #should not ever happen if working properly
 
+
 def enigma():
     model = EnigmaModel()
     view = EnigmaView(model)
@@ -183,14 +184,13 @@ if __name__ == "__main__":
     enigma()
     model = EnigmaModel()
 
-    # Test your encrypt function
-    rotors = "KQF"        # Initial rotor settings
-    message = "HEJSAOGTILLYKKE"     # Message to encrypt
+    rotors = "ABC"        # Initial rotor settings
+    message = "TURINGDIDIT"     # Message to encrypt
 
     cipher = model.encrypt(rotors, message)
     print("Original message:", message)
-    print("Rotor settings:   ", rotors)
+    print("Rotor start position:   ", rotors)
     print("Encrypted text:   ", cipher)
 
-    found = find_rotor(message, cipher)
+    found = find_rotors(message, cipher)
     print("Found rotors:     ", found)
