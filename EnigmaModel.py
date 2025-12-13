@@ -105,7 +105,7 @@ class EnigmaModel:
         self._rotors[index].advance()
         self.update()
 
-############### Projekt DEL 2 ####################
+############### Enkryption af DEL 2 ####################
     def encrypt(self, rotors: str, message: str) -> str:
 
         for rotor, ch, in zip(self._rotors, rotors):
@@ -151,30 +151,46 @@ class EnigmaModel:
 
         return ''.join(encryption_result)
 
+
+
+        ##################### Find Rotor af del 2 #########################
+
+def find_rotor(message: str, cipher: str) -> str:
+    for a in range(26):
+        for b in range(26):
+            for c in range(26):
+                rotors = (
+                    chr(ord('A') + a) +
+                    chr(ord('A') + b) +
+                    chr(ord('A') + c)
+                    )
+                
+                model = EnigmaModel()
+                result = model.encrypt(rotors, message)
+                if result == cipher:
+                    return rotors
+    return "Not found" #should not ever happen if working properly
+
 def enigma():
     model = EnigmaModel()
     view = EnigmaView(model)
     model.add_view(view)
 
 
+
 # Startup code
 if __name__ == "__main__":
     enigma()
-
-if __name__ == "__main__":
-    # Create an Enigma model
     model = EnigmaModel()
 
     # Test your encrypt function
-    rotors = "AAA"        # Initial rotor settings
-    message = "HELLO"     # Message to encrypt
+    rotors = "KQF"        # Initial rotor settings
+    message = "HEJSAOGTILLYKKE"     # Message to encrypt
 
     cipher = model.encrypt(rotors, message)
     print("Original message:", message)
     print("Rotor settings:   ", rotors)
     print("Encrypted text:   ", cipher)
 
-    # Optional: print final rotor offsets to see stepping
-    print("Final rotor offsets:")
-    for i, rotor in enumerate(model._rotors):
-        print(f"Rotor {i}: {rotor.get_offset()}")
+    found = find_rotor(message, cipher)
+    print("Found rotors:     ", found)
