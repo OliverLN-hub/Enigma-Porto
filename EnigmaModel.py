@@ -106,8 +106,17 @@ class EnigmaModel:
         self.update()
 
 ############### Enkryption af DEL 2 ####################
+    #Just a short breakdown of the encrypt function used here
+
+    """
+    Encrypts a message using an Enigma-liek process.
+    - rotors: a three-letter string (A to Z) which is essentially the rotor settings
+    - message: custom text consisting of capital Latin letters
+    Returns the encrypted text.
+    """
+
     def encrypt(self, rotors: str, message: str) -> str:
-        message = message.upper()
+        message = message.upper() # Just added so that capital letters are forced even if theyr by mistake wrriten in lowercase
         for rotor, ch, in zip(self._rotors, rotors):
             rotor.set_offset(ord(ch) - ord('A'))
 
@@ -139,7 +148,7 @@ class EnigmaModel:
             index = ord(REFLECTOR_PERMUTATION[index]) - ord('A')
 
 
-            # Backward pass via rotors like the one above
+            # Backward pass through rotors using inverse permutations instead
             for rotor in self._rotors:
                 index = apply_permutation_backward(
                     index,
@@ -154,7 +163,7 @@ class EnigmaModel:
 
 
         ##################### Find Rotor af del 2 #########################
-
+# Attempts to brute force serach for the original rotor settings by testing every single 26^3 = 17576 combination
 def find_rotors(message: str, cipher: str) -> str:
     for a in range(26):
         for b in range(26):
@@ -165,7 +174,7 @@ def find_rotors(message: str, cipher: str) -> str:
                     chr(ord('A') + c)
                     )
                 
-                model = EnigmaModel()
+                model = EnigmaModel() #Creates a fresh new Enigma model for every guess since the rorot positions will change when encrypting
                 result = model.encrypt(rotors, message)
                 if result == cipher:
                     return rotors

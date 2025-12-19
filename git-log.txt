@@ -1,0 +1,82 @@
+commit 0c6ac7d26504e39033d2bf50d3116d5e9883ae48
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Sat Dec 13 18:33:39 2025 +0100
+
+    presumably last commit, checked spelling errors and made minor adjustments to comments for clarity
+
+ EnigmaModel.py | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit 30950ee409b26bfedfd037abcd291f97f36b759c
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Sat Dec 13 12:56:32 2025 +0100
+
+    Commit her vedrører nr 2 med rotor finding i
+    opgaven, der er ting jeg gerne vil ændre og rette til stadig
+
+ EnigmaModel.py | 36 ++++++++++++++++++++++++++----------
+ 1 file changed, 26 insertions(+), 10 deletions(-)
+
+commit 71b1de201c3f42e8fa0299312577d96726eaa55d
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Fri Dec 12 17:00:21 2025 +0100
+
+    Encryption complete med beskeden "hELLO" der er
+    også lavet et eksempel som printer i terminalen i denne version
+
+ EnigmaModel.py                          |  61 +++++++++++++++++++++++++++++---
+ EnigmaRotor.py                          |   7 ++--
+ __pycache__/EnigmaRotor.cpython-313.pyc | Bin 2441 -> 2632 bytes
+ 3 files changed, 61 insertions(+), 7 deletions(-)
+
+commit 7cf5763886cd47e8fcd720db6a61658e16016aee
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Fri Dec 12 13:51:38 2025 +0100
+
+    Lavet rotor offset del uden nogen bugs
+
+ EnigmaModel.py                              |  12 ++++++++++++
+ __pycache__/EnigmaConstants.cpython-313.pyc | Bin 497 -> 501 bytes
+ __pycache__/EnigmaRotor.cpython-313.pyc     | Bin 2628 -> 2441 bytes
+ __pycache__/EnigmaView.cpython-313.pyc      | Bin 12301 -> 12305 bytes
+ 4 files changed, 12 insertions(+)
+
+commit 97b624f8eb1dea00aecec111b99d520944b762b9
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Fri Dec 5 00:18:30 2025 +0100
+
+    commited again for just changes
+
+ EnigmaModel.py                              |  82 +++++++++++++++++++++++-----
+ EnigmaRotor.py                              |  46 +++++++++++++---
+ __pycache__/EnigmaConstants.cpython-313.pyc | Bin 497 -> 497 bytes
+ __pycache__/EnigmaRotor.cpython-313.pyc     | Bin 1313 -> 2628 bytes
+ __pycache__/EnigmaView.cpython-313.pyc      | Bin 12301 -> 12301 bytes
+ 5 files changed, 106 insertions(+), 22 deletions(-)
+
+commit 4562d515c88759d916e2295e386724310daddf47
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Fri Dec 5 00:15:18 2025 +0100
+
+    Finished implemennting the last functionalities of the simulator. Should be ready now for the 2. part of the project.
+
+ EnigmaModel.py                              |  17 +++++++++++++----
+ EnigmaRotor.py                              |  20 ++++++++++++++++++++
+ __pycache__/EnigmaConstants.cpython-313.pyc | Bin 0 -> 497 bytes
+ __pycache__/EnigmaRotor.cpython-313.pyc     | Bin 0 -> 1313 bytes
+ __pycache__/EnigmaView.cpython-313.pyc      | Bin 12301 -> 12301 bytes
+ 5 files changed, 33 insertions(+), 4 deletions(-)
+
+commit 4dfd0df241740e2a3ff95f27c31666c63b1e48d5
+Author: Oliver <oliverlnordqvist@gmail.com>
+Date:   Thu Oct 30 12:06:27 2025 +0100
+
+    first commit
+
+ EnigmaConstants.py                     |  47 +++++
+ EnigmaModel.py                         |  54 ++++++
+ EnigmaView.py                          | 314 +++++++++++++++++++++++++++++++++
+ README.md                              |   1 +
+ __pycache__/EnigmaView.cpython-313.pyc | Bin 0 -> 12301 bytes
+ images/EnigmaTopView.png               | Bin 0 -> 919529 bytes
+ 6 files changed, 416 insertions(+)

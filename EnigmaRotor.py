@@ -35,12 +35,13 @@ class EnigmaRotor:
 
 
 
-
-#   apply_permutation
+#   applies a rotor permutation in a forward direction, also taking the offset into account
 def apply_permutation_forward(index, permutation, offset):
-    shifted_index = (index + offset) % 26
+    shifted_index = (index + offset) % 26  # the rotor is "rotated" so the index is shifted by the offset, and then gets the permutation applied
+    # Apply the permutation mapping
     permuted_char = permutation[shifted_index]
     permuted_index = ord(permuted_char) - ord('A')
+    # undo the shidt after the permutation
     final_index = (permuted_index - offset) % 26
     return final_index
 
